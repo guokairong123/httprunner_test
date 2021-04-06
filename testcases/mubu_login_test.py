@@ -17,6 +17,7 @@ class TestCaseMubuLogin(HttpRunner):
             "password": "q992926186",
             "folderId": "5R874ilX9nP"
         })
+        .export("jwt_token")
     )
 
     teststeps = [
