@@ -6,7 +6,7 @@ from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
 from testcases.mubu_login_test import TestCaseMubuLogin as MubuLogin
 
 
-class TestCaseMubu(HttpRunner):
+class TestCaseMubuCreateDoc(HttpRunner):
 
     config = (
         Config("testcase description")
@@ -14,15 +14,19 @@ class TestCaseMubu(HttpRunner):
         .verify(False)
         .variables(**{
             "host": "mubu.com",
-            "phone": "17876253458",
-            "password": "q992926186",
             "folderId": "5R874ilX9nP"
         })
     )
 
     teststeps = [
         Step(
-            RunTestCase("login").with_variables(**{}).call(MubuLogin)
+            RunTestCase("login")
+            .with_variables(**{
+                "phone": "17876253458",
+                "password": "q992926186",
+            })
+            .call(MubuLogin)
+            .export("jwt_token")
         ),
         Step(
             RunRequest("/v3/api/list/item_count")
@@ -1140,4 +1144,4 @@ class TestCaseMubu(HttpRunner):
 
 
 if __name__ == "__main__":
-    TestCaseMubu().test_start()
+    TestCaseMubuCreateDoc().test_start()

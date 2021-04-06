@@ -13,11 +13,8 @@ class TestCaseMubuLogin(HttpRunner):
         .verify(False)
         .variables(**{
             "host": "mubu.com",
-            "phone": "17876253458",
-            "password": "q992926186",
             "folderId": "5R874ilX9nP"
         })
-        .export("jwt_token")
     )
 
     teststeps = [
