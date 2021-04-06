@@ -3,6 +3,7 @@
 
 
 from httprunner import HttpRunner, Config, Step, RunRequest, RunTestCase
+from testcases.mubu_login_test import TestCaseMubuLogin as MubuLogin
 
 
 class TestCaseMubu(HttpRunner):
@@ -21,211 +22,7 @@ class TestCaseMubu(HttpRunner):
 
     teststeps = [
         Step(
-            RunRequest("/login")
-            .get("https://${host}/login")
-            .with_headers(
-                **{
-                    "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    "sec-ch-ua-mobile": "?0",
-                    "upgrade-insecure-requests": "1",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                    "sec-fetch-site": "same-origin",
-                    "sec-fetch-mode": "navigate",
-                    "sec-fetch-user": "?1",
-                    "sec-fetch-dest": "document",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_cookies(
-                **{
-                    "data_unique_id": "c8f45955-c3d6-4125-806e-86b88a48ea00",
-                    "language": "en-US",
-                    "country": "US",
-                    "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1616984547",
-                    "_ga": "GA1.2.846317235.1616984547",
-                    "_gid": "GA1.2.789545346.1616984547",
-                    "reg_entrance": "https%3A%2F%2F${host}%2F",
-                    "csrf_token": "a48ed18c-9922-418e-8572-1ab79daf2186",
-                    "SESSION": "31e63492-17e8-4556-940a-683f897c38cf",
-                    "_gat": "1",
-                    "reg_prepareId": "1787beed02f-1787beecef3-4187-a249-b50c64637caa",
-                    "reg_focusId": "f45e83e8-41c6-4187-a249-1787beed357",
-                    "_gat_UA-77727571-3": "1",
-                    "SLARDAR_WEB_ID": "90a80b40-38e3-49b8-beb3-6789697f4353",
-                    "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1616986997",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/login/password")
-            .get("https://${host}/login/password")
-            .with_headers(
-                **{
-                    "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    "sec-ch-ua-mobile": "?0",
-                    "upgrade-insecure-requests": "1",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                    "sec-fetch-site": "same-origin",
-                    "sec-fetch-mode": "navigate",
-                    "sec-fetch-user": "?1",
-                    "sec-fetch-dest": "document",
-                    "referer": "https://${host}/login",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_cookies(
-                **{
-                    "data_unique_id": "c8f45955-c3d6-4125-806e-86b88a48ea00",
-                    "language": "en-US",
-                    "country": "US",
-                    "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1616984547",
-                    "_ga": "GA1.2.846317235.1616984547",
-                    "_gid": "GA1.2.789545346.1616984547",
-                    "reg_entrance": "https%3A%2F%2F${host}%2F",
-                    "csrf_token": "a48ed18c-9922-418e-8572-1ab79daf2186",
-                    "SESSION": "31e63492-17e8-4556-940a-683f897c38cf",
-                    "_gat": "1",
-                    "_gat_UA-77727571-3": "1",
-                    "reg_prepareId": "1787bef8c89-1787bef8c84-4e0e-8265-3f7bc7eb089a",
-                    "SLARDAR_WEB_ID": "91c007d2-504b-463f-95d3-1954e30538a3",
-                    "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1616987000",
-                    "reg_focusId": "95b9830b-3673-4e0e-8265-1787bef9055",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/api/login/submit")
-            .post("https://${host}/api/login/submit")
-            .with_headers(
-                **{
-                    "content-length": "51",
-                    "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    "accept": "application/json, text/javascript, */*; q=0.01",
-                    "x-requested-with": "XMLHttpRequest",
-                    "sec-ch-ua-mobile": "?0",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                    "origin": "https://${host}",
-                    "sec-fetch-site": "same-origin",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/login/password",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_cookies(
-                **{
-                    "data_unique_id": "c8f45955-c3d6-4125-806e-86b88a48ea00",
-                    "language": "en-US",
-                    "country": "US",
-                    "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1616984547",
-                    "_ga": "GA1.2.846317235.1616984547",
-                    "_gid": "GA1.2.789545346.1616984547",
-                    "reg_entrance": "https%3A%2F%2F${host}%2F",
-                    "csrf_token": "a48ed18c-9922-418e-8572-1ab79daf2186",
-                    "SESSION": "31e63492-17e8-4556-940a-683f897c38cf",
-                    "_gat": "1",
-                    "_gat_UA-77727571-3": "1",
-                    "reg_prepareId": "1787bef8c89-1787bef8c84-4e0e-8265-3f7bc7eb089a",
-                    "reg_focusId": "95b9830b-3673-4e0e-8265-1787bef9055",
-                    "SLARDAR_WEB_ID": "d2f5c0e3-bef5-4c0e-b9ce-8900f7a37b93",
-                    "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1616987001",
-                }
-            )
-            .with_data(
-                {"phone": "$phone", "password": "$password", "remember": "true"}
-            )
-            .extract()
-            .with_jmespath('cookies."Jwt-Token"', "jwt_token")
-            .with_jmespath("cookies.user_persistence", "user_persistence")
-            .validate()
-            .assert_equal("status_code", 200)
-            .assert_equal("body.code", 0)
-            .assert_equal("body.msg", None)
-        ),
-        Step(
-            RunRequest("/app")
-            .get("https://${host}/app")
-            .with_headers(
-                **{
-                    "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    "sec-ch-ua-mobile": "?0",
-                    "upgrade-insecure-requests": "1",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                    "sec-fetch-site": "same-origin",
-                    "sec-fetch-mode": "navigate",
-                    "sec-fetch-user": "?1",
-                    "sec-fetch-dest": "document",
-                    "referer": "https://${host}/login/password",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_cookies(
-                **{
-                    "data_unique_id": "c8f45955-c3d6-4125-806e-86b88a48ea00",
-                    "language": "en-US",
-                    "country": "US",
-                    "Hm_lvt_4426cbb0486a79ea049b4ad52d81b504": "1616984547",
-                    "_ga": "GA1.2.846317235.1616984547",
-                    "_gid": "GA1.2.789545346.1616984547",
-                    "reg_entrance": "https%3A%2F%2F${host}%2F",
-                    "csrf_token": "a48ed18c-9922-418e-8572-1ab79daf2186",
-                    "SESSION": "31e63492-17e8-4556-940a-683f897c38cf",
-                    "_gat": "1",
-                    "_gat_UA-77727571-3": "1",
-                    "reg_prepareId": "1787bef8c89-1787bef8c84-4e0e-8265-3f7bc7eb089a",
-                    "reg_focusId": "95b9830b-3673-4e0e-8265-1787bef9055",
-                    "SLARDAR_WEB_ID": "d2f5c0e3-bef5-4c0e-b9ce-8900f7a37b93",
-                    "Hm_lpvt_4426cbb0486a79ea049b4ad52d81b504": "1616987001",
-                    "Jwt-Token": "$jwt_token",
-                    "user_persistence": "e12a1282-0f42-4a31-b9c3-c6ffe6b1b677",
-                }
-            )
-            .validate()
-            .assert_equal("status_code", 200)
-        ),
-        Step(
-            RunRequest("/v3/api/user/profile")
-            .post("/v3/api/user/profile")
-            .with_headers(
-                **{
-                    "content-length": "0",
-                    "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
-                    "sec-ch-ua-mobile": "?0",
-                    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
-                    "data-unique-id": "c8f45955-c3d6-4125-806e-86b88a48ea00",
-                    "accept": "application/json, text/plain, */*",
-                    "jwt-token": "$jwt_token",
-                    "x-request-id": "${(get_random_request_id)}",
-                    "version": "3.0.0.21267",
-                    "origin": "https://${host}",
-                    "sec-fetch-site": "same-site",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-dest": "empty",
-                    "referer": "https://${host}/",
-                    "accept-encoding": "gzip, deflate, br",
-                    "accept-language": "zh-CN,zh;q=0.9",
-                }
-            )
-            .with_data("")
-            .extract()
-            .with_jmespath("body.data.id", "userId")
-            .validate()
-            .assert_equal("status_code", 200)
-            .assert_equal("body.code", 0)
-            .assert_greater_than("body.data.level", 0)
+            RunTestCase("login").with_variables(**{}).call(MubuLogin)
         ),
         Step(
             RunRequest("/v3/api/list/item_count")
@@ -918,7 +715,7 @@ class TestCaseMubu(HttpRunner):
                             "documentId": "$docId",
                             "version": 2,
                             "content": [
-                                {"name": "nameChanged", "title": "测试", "original": ""}
+                                {"name": "nameChanged", "title": "${gen_random_string(10)}", "original": ""}
                             ],
                         }
                     },
